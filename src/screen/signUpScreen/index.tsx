@@ -8,6 +8,7 @@ import {
   Image,
 } from 'react-native';
 import chatImage from '../../assets/chat.png';
+import TextInputWithIcon from '../../components/textInput';
 interface Props {}
 
 const SignUpScreen: React.FC<Props> = ({navigation}) => {
@@ -23,28 +24,32 @@ const SignUpScreen: React.FC<Props> = ({navigation}) => {
           <Text style={styles.logInText}>Sign Up</Text>
         </View>
         <View style={styles.inputsContainer}>
-          <TextInput
-            style={styles.usernameTextInput}
+        <TextInputWithIcon
+            style={styles.TextInputWithIcon}
+            iconName={'user'}
             placeholder={'Username'}
-            placeholderTextColor={'#BBBAC1'}
           />
-          <TextInput
-            style={styles.usernameTextInput}
+          <TextInputWithIcon
+            style={styles.TextInputWithIcon}
+            iconName={'phone'}
             placeholder={'Phone Number'}
-            placeholderTextColor={'#BBBAC1'}
           />
-          <TextInput
-            style={styles.usernameTextInput}
+          <TextInputWithIcon
+            style={styles.TextInputWithIcon}
+            iconName={'envelope'}
             placeholder={'Email'}
-            placeholderTextColor={'#BBBAC1'}
           />
-          <TextInput
-            style={styles.usernameTextInput}
+          <TextInputWithIcon
+            style={styles.TextInputWithIcon}
+            iconName={'lock'}
             placeholder={'Password'}
-            placeholderTextColor={'#BBBAC1'}
           />
           <View style={styles.loginFooterContainer}>
-            <TouchableOpacity style={styles.loginButton}>
+            <TouchableOpacity
+              style={styles.loginButton}
+              onPress={() => {
+                navigation.navigate('Home');
+              }}>
               <Text style={styles.logInButtonText}>Sign Up</Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -65,6 +70,10 @@ const styles = StyleSheet.create({
   mainContainer: {
     height: '100%',
     backgroundColor: 'rgb(93,149,255)',
+  },
+  TextInputWithIcon: {
+    marginHorizontal: 10,
+    marginVertical: 10,
   },
   logoArea: {
     flex: 1,
