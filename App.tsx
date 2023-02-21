@@ -13,6 +13,7 @@ import Home from './src/screen/home';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {StatusBar} from 'react-native';
+import ChatScreen from './src/screen/chat';
 
 const Stack = createNativeStackNavigator();
 function App(): JSX.Element {
@@ -34,6 +35,11 @@ function App(): JSX.Element {
           name="Home"
           component={Home}
           options={{title: 'Home', headerShown: false}}
+        />
+         <Stack.Screen
+          name="ChatScreen"
+          component={ChatScreen}
+          options={{title: 'ChatScreen', headerShown: false}}
         />
       </Stack.Navigator>
       {/* <LoginScreen /> */}

@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   StatusBar,
   FlatList,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import TextInputWithIcon from '../../components/textInput';
 import chatImage from '../../assets/chat.png';
@@ -97,46 +98,54 @@ const testArray = [
     image: a5,
   },
 ];
-
+let navigationGlobal: any = null;
 const Item = ({item}) => (
-  <View style={{justifyContent: 'center', alignItems: 'center'}}>
-    <View style={styles.itemContainer}>
-      <View style={styles.avatarContainer}>
-        <Image source={item.image} style={styles.avatarImage} />
-      </View>
-      <View style={styles.metaContainer}>
-        <View style={styles.metaLeftSide}>
-          <Text style={styles.metaLeftNameText}>{item?.name}</Text>
-          <Text style={styles.metaLeftLastMessageText}>
-            {item?.lastMessage}
-          </Text>
+  <TouchableWithoutFeedback
+    onPress={() => {
+      console.log('********************************', item);
+      navigationGlobal.navigate('ChatScreen', {
+        ...item,
+      });
+    }}>
+    <View style={{justifyContent: 'center', alignItems: 'center'}}>
+      <View style={styles.itemContainer}>
+        <View style={styles.avatarContainer}>
+          <Image source={item.image} style={styles.avatarImage} />
         </View>
-        <View style={styles.metaRightSide}>
-          <Text style={styles.metaRightTimeText}>{item?.time}</Text>
-          <View style={styles.metaUnreadCountContainer}>
-            {/* under cound goes here */}
-            {/* <Text style={styles.metaUnreadCountText}>{item?.unreadCount}</Text> */}
-            {item?.unreadCount !== 0 && (
-              <View
-                style={[styles.countContainer, {backgroundColor: '#3F7EFF'}]}>
-                <Text style={[styles.countText, {color: 'white'}]}>
-                  {item?.unreadCount}
-                </Text>
-              </View>
-            )}
+        <View style={styles.metaContainer}>
+          <View style={styles.metaLeftSide}>
+            <Text style={styles.metaLeftNameText}>{item?.name}</Text>
+            <Text style={styles.metaLeftLastMessageText}>
+              {item?.lastMessage}
+            </Text>
+          </View>
+          <View style={styles.metaRightSide}>
+            <Text style={styles.metaRightTimeText}>{item?.time}</Text>
+            <View style={styles.metaUnreadCountContainer}>
+              {/* under cound goes here */}
+              {/* <Text style={styles.metaUnreadCountText}>{item?.unreadCount}</Text> */}
+              {item?.unreadCount !== 0 && (
+                <View
+                  style={[styles.countContainer, {backgroundColor: '#3F7EFF'}]}>
+                  <Text style={[styles.countText, {color: 'white'}]}>
+                    {item?.unreadCount}
+                  </Text>
+                </View>
+              )}
+            </View>
           </View>
         </View>
       </View>
+      <View
+        style={{
+          backgroundColor: '#f2f2f2',
+          width: '85%',
+          height: 1,
+          borderRadius: 50,
+        }}
+      />
     </View>
-    <View
-      style={{
-        backgroundColor: '#f2f2f2',
-        width: '85%',
-        height: 1,
-        borderRadius: 50,
-      }}
-    />
-  </View>
+  </TouchableWithoutFeedback>
 );
 
 const FirstRoute = () => (
@@ -175,7 +184,9 @@ const renderScene = SceneMap({
   third: thirdRoute,
 });
 
-const HomeScreen: React.FC<Props> = ({}) => {
+const HomeScreen: React.FC<Props> = ({navigation}) => {
+  console.log('homescreeen', navigation)
+  navigationGlobal = navigation
   const layout = useWindowDimensions();
   const unreadCounts = testArray.filter(item => item.unreadCount !== 0);
   const [index, setIndex] = React.useState(0);
@@ -421,14 +432,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    shadowColor: "#3F7EFF",
+    shadowColor: '#3F7EFF',
     shadowOffset: {
       width: 0,
       height: 9,
     },
-    shadowOpacity:  0.22,
+    shadowOpacity: 0.22,
     shadowRadius: 10.24,
-    elevation: 13
+    elevation: 13,
   },
   newChatPlushText: {
     color: 'white',
