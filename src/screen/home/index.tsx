@@ -273,6 +273,12 @@ const HomeScreen: React.FC<Props> = ({}) => {
           <Text>list of chate</Text>
         </View> */}
       </View>
+      <View style={styles.newChatContainer}>
+        <TouchableOpacity style={styles.newChatButton}>
+          <Text style={styles.newChatPlushText}>+</Text>
+          <Text style={styles.newChatText}>New Chat</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -397,6 +403,43 @@ const styles = StyleSheet.create({
     color: 'gray',
     fontSize: 14,
     fontWeight: '500',
+  },
+  newChatContainer: {
+    position: 'absolute',
+    width: 100,
+    height: 100,
+    right: 50,
+    bottom: -20,
+    zIndex: 100,
+    // bottom:50
+  },
+  newChatButton: {
+    backgroundColor: '#3F7EFF',
+    width: 130,
+    height: 50,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    shadowColor: "#3F7EFF",
+    shadowOffset: {
+      width: 0,
+      height: 9,
+    },
+    shadowOpacity:  0.22,
+    shadowRadius: 10.24,
+    elevation: 13
+  },
+  newChatPlushText: {
+    color: 'white',
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginRight: 5,
+  },
+  newChatText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   // chatListContainer: {},
 });
