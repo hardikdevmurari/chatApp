@@ -12,11 +12,13 @@ import Home from './src/screen/home';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {StatusBar} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 function App(): JSX.Element {
   return (
     <NavigationContainer>
+      <StatusBar backgroundColor={'#3F7EFF'} barStyle={'light-content'} />
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
           name="Login"
@@ -28,7 +30,11 @@ function App(): JSX.Element {
           component={SignUpScreen}
           options={{title: 'Sign Up', headerShown: false}}
         />
-        <Stack.Screen name="Home" component={Home} options={{title: 'Home'}} />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{title: 'Home', headerShown: false}}
+        />
       </Stack.Navigator>
       {/* <LoginScreen /> */}
       {/* <SignUpScreen /> */}
