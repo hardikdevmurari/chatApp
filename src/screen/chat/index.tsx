@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
   View,
@@ -17,6 +18,124 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {TabView, SceneMap} from 'react-native-tab-view';
 
 interface Props {}
+
+const chatConv = [
+  {
+    text: 'HI Bro..',
+    from: 'self',
+    time: '22:01',
+  },
+  {
+    text: 'Hi How are You?',
+    time: '22:02',
+  },
+  {
+    text: 'I am Good.',
+    from: 'self',
+    time: '22:03',
+  },
+  {
+    text: 'Thank You for asking',
+    from: 'self',
+    time: '22:04',
+  },
+  {
+    text: 'Welcome',
+    time: '22:05',
+  },
+  {
+    text: 'So When we Meet?',
+    time: '22:06',
+  },
+  {
+    text: 'When ever you Want',
+    from: 'self',
+    time: '22:07',
+  },
+  {
+    text: 'Ok',
+    time: '22:08',
+  },
+  {
+    text: '👍',
+    time: '22:08',
+  },
+  {
+    text: '👍👍👍👍👍',
+    from: 'self',
+    time: '22:09',
+  },
+];
+const renderItemComponent = ({item}) => {
+  return (
+    <View style={{}}>
+      {item?.from ? (
+        <View
+          style={{
+            backgroundColor: '#3F7EFF',
+            padding: 10,
+            maxWidth: '80%',
+            alignSelf: 'flex-end',
+            marginVertical: 10,
+            borderTopEndRadius: 25,
+            borderTopLeftRadius: 25,
+            borderBottomLeftRadius: 25,
+            flexDirection:'row',
+            justifyContent:'space-between'
+          }}>
+          <Text
+            style={{
+              fontSize: 16,
+              color: 'white',
+              marginHorizontal:10
+            }}>
+            {item.text}
+          </Text>
+          <Text
+            style={{
+              fontSize: 12,
+              color: 'white',
+              alignSelf:'flex-end'
+            }}>
+            {item.time}
+          </Text>
+        </View>
+      ) : (
+        <View
+          style={{
+            backgroundColor: '#E5EBFD',
+            padding: 10,
+            marginVertical: 10,
+            maxWidth: '80%',
+            alignSelf: 'flex-start',
+            borderTopEndRadius: 25,
+            borderTopLeftRadius: 25,
+            borderBottomEndRadius: 25,
+            borderBottomRightRadius: 25,
+            flexDirection:'row',
+            justifyContent:'space-between'
+          }}>
+          <Text
+            style={{
+              fontSize: 16,
+              color: 'black',
+              marginHorizontal:10
+            }}>
+            {item.text}
+          </Text>
+          <Text
+            style={{
+              fontSize: 12,
+              color: 'black',
+              alignSelf:'flex-end'
+            }}>
+            {item.time}
+          </Text>
+        </View>
+      )}
+    </View>
+  );
+};
 
 const ChatScreen: React.FC<Props> = ({navigation, route}) => {
   console.log('---------------------', route.params);
@@ -52,19 +171,23 @@ const ChatScreen: React.FC<Props> = ({navigation, route}) => {
       </View>
       <View style={styles.contentArea}>
         <View style={styles.chatConversationContainer}>
-          <Text>no message found</Text>
+          <FlatList
+            data={chatConv.reverse()}
+            renderItem={item => renderItemComponent(item)}
+            inverted={true}
+          />
         </View>
         <View style={styles.sendMessageContainer}>
           <View style={styles.customInputBox}>
-            <View style={{margin:10}}>
+            <View style={{margin: 10}}>
               <Icon name={'paperclip'} size={24} color="black" />
             </View>
             <TextInput
-              style={{flex: 4,height:100}}
+              style={{flex: 4, height: 100}}
               placeholder="Write a message"
               placeholderTextColor={'black'}
             />
-            <View style={{marginHorizontal:5}}>
+            <View style={{marginHorizontal: 5}}>
               <Icon name={'microphone'} size={24} color="black" />
             </View>
             <View style={styles.sendIcon}>
@@ -141,6 +264,7 @@ const styles = StyleSheet.create({
   },
   chatConversationContainer: {
     flex: 9,
+    margin: 10,
   },
   sendMessageContainer: {
     flex: 1,
